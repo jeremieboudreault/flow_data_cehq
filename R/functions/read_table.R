@@ -19,8 +19,17 @@ read_table <- function(path) {
     # Drop not relevent columns.
     x[, `:=`(STATION = NULL, EMPTY = NULL)]
 
-    # Convert data to integer format.
-    x[, DATE := date_to_int(DATE)]
+    # Convert date to the proper format.
+    x[, DATE := as.Date(DATE)]
+
+    # Add a fields for <DATEI>.
+    x[, DATEI := date_to_int(DATE)]
+
+    # Reorder columns.
+    data.table::setcolorder(x, c("DATE", "DATEI", "FLOW", "FLAG"))
+
+    # Update <FLAG> when missing values.
+    x[is.na(FLOW), FLAG := "NA"]
 
     # Return the table.
     return(x[])
