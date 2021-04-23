@@ -16,6 +16,7 @@
 
 
 library(data.table)
+library(ggplot2)
 
 
 # Functions --------------------------------------------------------------------
@@ -39,9 +40,72 @@ stn_info <- read_info(path)
 stn_info
 
 
+
 # Read table -------------------------------------------------------------------
 
 
-stn_x <- read_table(path)
-stn_x
+x <- read_table(path)
+x
+
+
+# Plot flow series -------------------------------------------------------------
+
+
+# Full series.
+plot_flow_series(
+    x       = x,
+    info    = stn_info,
+    spot.na = FALSE,
+    start   = -Inf,
+    stop    = Inf
+)
+
+# Full series with spotted NAs.
+plot_flow_series(
+    x       = x,
+    info    = stn_info,
+    spot.na = TRUE,
+    start   = -Inf,
+    stop    = Inf
+)
+
+# Sub series.
+plot_flow_series(
+    x       = x,
+    info    = stn_info,
+    spot.na = FALSE,
+    start   = 20200101,
+    end     = 20201231
+)
+
+# Sub series with spots on NAs.
+plot_flow_series(
+    x       = x,
+    info    = stn_info,
+    spot.na = TRUE,
+    start   = 20200101,
+    end     = 20201231
+)
+
+
+# Block maxima -----------------------------------------------------------------
+
+
+plot_flow_bmax(
+    x      = x,
+    info   = stn_info,
+    block  = "year"
+)
+
+
+# POT --------------------------------------------------------------------------
+
+
+plot_flow_pot(
+    x      = x,
+    info   = stn_info,
+    thres  =  quantile(x$FLOW, 0.95)
+)
+
+
 
