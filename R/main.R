@@ -22,87 +22,110 @@ library(ggplot2)
 # Functions --------------------------------------------------------------------
 
 
-source(file.path("R", "functions", "date_to_int.R"))
+source(file.path("R", "functions", "dates.R"))
 source(file.path("R", "functions", "read_table.R"))
 source(file.path("R", "functions", "read_info.R"))
+source(file.path("R", "functions", "plot_helpers.R"))
 source(file.path("R", "functions", "plot_flow_series.R"))
-source(file.path("R", "functions", "plot_flow_bmax.R"))
 source(file.path("R", "functions", "plot_flow_pot.R"))
 
 
-# Path to file -----------------------------------------------------------------
+# Path to files ----------------------------------------------------------------
 
 
-path <- file.path("data", "062803_Q.txt")
+# Sainte-Marguerite river <SMR>.
+path_smr <- file.path("data", "062803_Q.txt")
+
+# Chicoutimi river <CHI>.
+path_chi <- file.path("data", "061004_Q.txt")
 
 
 # Read information about the station -------------------------------------------
 
 
-stn_info <- read_info(path)
-stn_info
+# Read SRM info.
+smr_info <- read_info(path_smr)
+smr_info
+
+# Read CHI info.
+chi_info <- read_info(path_chi)
+chi_info
 
 
+# Read station data ------------------------------------------------------------
 
-# Read table -------------------------------------------------------------------
+
+# Read SRM table.
+smr_tbl <- read_table(path_smr)
+smr_tbl
+
+# Read CHI table.
+chi_tbl <- read_table(path_chi)
+chi_tbl
 
 
-x <- read_table(path)
-x
+# Data exploration -------------------------------------------------------------
+
+
+# Number of years of obersations.
+nrow(smr_tbl)/365.25      # ~ 22 years
+nrow(chi_tbl)/365.25      # ~ 111 years
+
+# Number of missing.
+sum(is.na(smr_tbl$FLOW))  # 0
+sum(is.na(chi_tbl$FLOW))  # 906
 
 
 # Plot flow series -------------------------------------------------------------
 
 
-# Full series.
+# Full series of the Sainte-Marguerite river.
 plot_flow_series(
-    x       = x,
-    info    = stn_info,
+    x       = smr_tbl,
+    info    = smr_info,
 )
 
-# Full series with spotted NAs.
+# Subset of the Sainte-Marguerite river series.
 plot_flow_series(
-    x       = x,
-    info    = stn_info,
+    x       = smr_tbl,
+    info    = smr_info,
+    start   = "2019/01/01",
+    end     = "2020/12/31"
+)
+
+# Full series of Chicoutimi river with spotted NAs.
+plot_flow_series(
+    x       = chi_tbl,
+    info    = chi_info,
     spot.na = TRUE,
 )
 
-# Subset of the series.
+# Subset of the Chicoutimi river series with spotted NAs.
 plot_flow_series(
-    x       = x,
-    info    = stn_info,
-    start   = 20200101,
-    end     = 20201231
-)
-
-# Subset of the series with spotted NAs.
-plot_flow_series(
-    x       = x,
-    info    = stn_info,
+    x       = chi_tbl,
+    info    = chi_info,
     spot.na = TRUE,
-    start   = 20200101,
-    end     = 20201231
+    start   = "1918/03/01",
+    end     = "1919/11/01"
 )
 
 
-# Block maxima -----------------------------------------------------------------
+# Peaks over threshold ---------------------------------------------------------
 
 
-plot_flow_bmax(
-    x      = x,
-    info   = stn_info,
-    block  = "year"
-)
-
-
-# POT --------------------------------------------------------------------------
-
-
+# All peak over threshold for Chicoutimi.
 plot_flow_pot(
-    x      = x,
-    info   = stn_info,
-    thres  =  quantile(x$FLOW, 0.95)
+    x      = chi_tbl,
+    info   = chi_info,
+    thresh = 300L
 )
 
-
+# Peaks over threshold for the last 5 years of Sainte-Marguerite River.
+plot_flow_pot(
+    x      = smr_tbl,
+    info   = smr_info,
+    thresh = quantile(smr_tbl$FLOW, 0.995, na.rm = TRUE),
+    start  = "2016/01/01",
+    end    = "2020/12/31"
+)
 
