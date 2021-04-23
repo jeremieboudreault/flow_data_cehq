@@ -2,14 +2,14 @@ Import and visualize flow data from CHEQ 🌊
 ================================================================================
 
 
-Files downloaded from CEHQ are messy. The header contains useful information, but this information is not well organised. The table with values appears a couple of lines below the header. In this repo, some __functions__ are written to allow importing, tidying and visualizing flow data downloaded from CEHQ website. 
+Files downloaded from CEHQ are messy. The header contains useful information, but this information is not well organised. The table with values appears a couple of lines below the header. In this project, I share some functions that I've written to allow importing, tidying and visualizing flow data downloaded from CEHQ website. 
 
 
 Data
 --------------------------------------------------------------------------------
 
 
-Data consist of two stations downloaded from the [CEHQ website](https://www.cehq.gouv.qc.ca/hydrometrie/historique_donnees/default.asp).
+Data consist of two stations downloaded from the [CEHQ website](https://www.cehq.gouv.qc.ca/hydrometrie/historique_donnees/default.asp) :
 
 + `062803_Q.txt` : Station on the Sainte-Margerite river.
 + `061004_Q.txt` : Station on the Chicoutimi river.
