@@ -13,8 +13,6 @@ read_table <- function(path) {
         fill  = TRUE
     )
 
-    dim(x)
-
     # Updates names.
     names(x) <- c("STATION", "DATE", "FLOW", "FLAG", "EMPTY")
 
