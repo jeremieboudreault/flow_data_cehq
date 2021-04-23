@@ -63,8 +63,8 @@ plot_flow_pot <- function(
         values = pch_cex
     ) +
     labs(
-        title    = stn_info$DESC,
-        subtitle = paste0("(Station ", stn_info$STATION_ID, ")"),
+        title    = info$DESC,
+        subtitle = paste0("(Station ", info$STATION_ID, ")"),
         x        = "Date",
         y        = "Flow (m³/s)"
     ) +
