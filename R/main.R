@@ -23,6 +23,7 @@ library(data.table)
 
 source(file.path("R", "functions", "date_to_int.R"))
 source(file.path("R", "functions", "read_table.R"))
+source(file.path("R", "functions", "read_info.R"))
 
 
 # Path to file -----------------------------------------------------------------
@@ -31,9 +32,16 @@ source(file.path("R", "functions", "read_table.R"))
 path <- file.path("data", "062803_Q.txt")
 
 
+# Read information about the station -------------------------------------------
+
+
+stn_info <- read_info(path)
+stn_info
+
+
 # Read table -------------------------------------------------------------------
 
 
-x <- read_table(path)
-
+stn_x <- read_table(path)
+stn_x
 
