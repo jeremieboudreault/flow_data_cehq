@@ -25,6 +25,9 @@ library(ggplot2)
 source(file.path("R", "functions", "date_to_int.R"))
 source(file.path("R", "functions", "read_table.R"))
 source(file.path("R", "functions", "read_info.R"))
+source(file.path("R", "functions", "plot_flow_series.R"))
+source(file.path("R", "functions", "plot_flow_bmax.R"))
+source(file.path("R", "functions", "plot_flow_pot.R"))
 
 
 # Path to file -----------------------------------------------------------------
@@ -55,9 +58,6 @@ x
 plot_flow_series(
     x       = x,
     info    = stn_info,
-    spot.na = FALSE,
-    start   = -Inf,
-    stop    = Inf
 )
 
 # Full series with spotted NAs.
@@ -65,20 +65,17 @@ plot_flow_series(
     x       = x,
     info    = stn_info,
     spot.na = TRUE,
-    start   = -Inf,
-    stop    = Inf
 )
 
-# Sub series.
+# Subset of the series.
 plot_flow_series(
     x       = x,
     info    = stn_info,
-    spot.na = FALSE,
     start   = 20200101,
     end     = 20201231
 )
 
-# Sub series with spots on NAs.
+# Subset of the series with spotted NAs.
 plot_flow_series(
     x       = x,
     info    = stn_info,
