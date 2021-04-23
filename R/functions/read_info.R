@@ -32,7 +32,7 @@ read_info <- function(path) {
     l <- list(
         STATION_ID = stn,
         DESC       = desc,
-        WS_AREA    = wssize,
+        WS_AREA    = ws,
         REGIME     = reg,
         LATITUDE   = lat,
         LONGITUDE  = lon
