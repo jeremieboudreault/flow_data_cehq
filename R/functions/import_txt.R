@@ -38,14 +38,14 @@ import_txt <- function(
         urls <- paste0("https://www.cehq.gouv.qc.ca/depot/historique_donnees/fichier/",filenames)
 
         # write file with urls in it
-        write.table(data.frame(urls), "data/temp_station_urls00.txt", row.names = F, col.names = F, quote = F)
+        write.table(data.frame(urls), file.path("data","temp_station_urls00.txt"), row.names = F, col.names = F, quote = F)
 
         # run command in terminal
-        shell_command <- paste0("cd data/; wget --input-file temp_station_urls00.txt --wait=",wait)
+        shell_command <- paste0("cd data; wget --input-file temp_station_urls00.txt --wait=",wait)
         system(command = shell_command)
 
         # remove temp file
-        file.remove("data/temp_station_urls00.txt")
+        file.remove(file.path("data","temp_station_urls00.txt"))
 
     }else{
         cat("Implemented only for Linux OS (so far).\n")
