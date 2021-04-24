@@ -35,7 +35,7 @@ import_txt <- function(
     if(OS == "Linux"){
 
         # construct appropriate urls
-        urls <- paste0("https://www.cehq.gouv.qc.ca/depot/historique_donnees/fichier/",station_numbers,"_",suffix,".txt")
+        urls <- paste0("https://www.cehq.gouv.qc.ca/depot/historique_donnees/fichier/",filenames)
 
         # write file with urls in it
         write.table(data.frame(urls), "data/temp_station_urls00.txt", row.names = F, col.names = F, quote = F)
