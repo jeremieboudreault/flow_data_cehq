@@ -52,6 +52,7 @@ read_info <- function(path) {
 
 # Mapping between weird character and correct UTF-8 values.
 map_char <- list(
+    `\xC9` = "É",
     `\xe8` = "è",
     `\xe9` = "é",
     `\xEA` = "ê",
