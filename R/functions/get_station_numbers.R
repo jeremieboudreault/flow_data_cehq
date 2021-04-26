@@ -27,12 +27,8 @@ rvest_stations <- function(
 
     # first row of each tibble contains the column names, we edit them to avoid later problems
     meta_title <- meta_list[[1]][1,]
-    if(original_column_names){
-        meta_title <- substr(meta_title,1,sapply(meta_title,nchar)-1)
-        meta_title <- gsub(" ", "_", meta_title)
-    }else{
-        meta_title <- c("numero", "nom", "description", "etat", "municipalite", "region_admin", "riv_lac", "type_donnees")
-    }
+    meta_title <- substr(meta_title,1,sapply(meta_title,nchar)-1)
+    meta_title <- gsub(" ", "_", meta_title)
 
     # rbind all tibbles (without first row) and set names
     stns_meta <- do.call("rbind", lapply(meta_list, function(tab) tab[-1,,drop=F]))
