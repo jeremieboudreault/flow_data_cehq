@@ -10,7 +10,9 @@ rvest_stations <- function(
 ) {
 
     region_numbers <- as.character(region_numbers)
-    if(nchar(region_numbers) == 1) region_numbers <- paste0("0",region_numbers)
+    for(k in seq_along(region_numbers)){
+        if(nchar(region_numbers[k]) == 1) region_numbers[k] <- paste0("0",region_numbers[k])
+    }
 
     # weird to put that in there right?
     library(dplyr)
