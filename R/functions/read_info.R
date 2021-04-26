@@ -54,6 +54,7 @@ read_info <- function(path) {
 map_char <- list(
     `\xe8` = "è",
     `\xe9` = "é",
+    `\xEA` = "ê",
     `\xe0` = "à",
     `\xb3` = "**3",
     `\xb2` = "**2",
