@@ -4,6 +4,9 @@
 # Get station numbers within a given hydrographic region
 
 # requires rvest, dplyr
+# weird to put that in there right?
+library(dplyr)
+library(rvest)
 
 rvest_stations <- function(
     region_numbers # 0 to 13 (except 0 and 11)
@@ -13,10 +16,6 @@ rvest_stations <- function(
     for(k in seq_along(region_numbers)){
         if(nchar(region_numbers[k]) == 1) region_numbers[k] <- paste0("0",region_numbers[k])
     }
-
-    # weird to put that in there right?
-    library(dplyr)
-    library(rvest)
 
     # url of interest (April 21, 2021)
     urls <- paste0("https://www.cehq.gouv.qc.ca/hydrometrie/historique_donnees/ListeStation.asp?regionhydro=",region_numbers,"&Tri=Non")
