@@ -4,7 +4,7 @@ Station:        061004         Chicoutimi - à 0,3 km en aval du barrage de Porta
 Bassin versant: 3444 km²       Régime: Influencé mensuellement                           
 Coordonnées:    (NAD83) 48° 18' 28" // -71° 12' 40"
 
-Date de création du fichier: 2021-04-22 08:23
+Date de création du fichier: 2021-04-28 08:34
 Particularité(s):
 - 
 - 
@@ -40674,3 +40674,9 @@ Station        Date                Débit (m³/s)   Remarque
 061004         2021/04/19          28.63          MJ
 061004         2021/04/20          28.78          MJ
 061004         2021/04/21          28.82          MJ
+061004         2021/04/22          28.51          MJ
+061004         2021/04/23          28.29          MJ
+061004         2021/04/24          28.93          MJ
+061004         2021/04/25          29.51          MJ
+061004         2021/04/26          28.47          MJ
+061004         2021/04/27          28.32          MJ
