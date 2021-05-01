@@ -22,11 +22,15 @@ read_table <- function(path) {
     # Convert date to the proper format.
     x[, DATE := as.Date(DATE)]
 
-    # Add a fields for <DATEI>.
+    # Add a field for <DATEI>.
     x[, DATEI := date_to_int(DATE)]
 
+    # Add fields for <YEAR> and <MONTH>.
+    x[, YEAR := as.integer(substr(DATEI, 1L, 4L))]
+    x[, MONTH := as.integer(substr(DATEI, 5L, 6L))]
+
     # Reorder columns.
-    data.table::setcolorder(x, c("DATE", "DATEI", "FLOW", "FLAG"))
+    data.table::setcolorder(x, c("DATE", "DATEI", "YEAR", "MONTH", "FLOW", "FLAG"))
 
     # Update <FLAG> when missing values.
     x[is.na(FLOW), FLAG := "NA"]
