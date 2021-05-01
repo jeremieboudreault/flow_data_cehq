@@ -1,8 +1,11 @@
-Import and visualize flow data from CHEQ 🌊
+Download, import and visualize flow data from CHEQ 🌊
 ================================================================================
 
 
-Files downloaded from CEHQ are messy. The header contains useful information, but this information is not well organised. The table with values appears a couple of lines below the header. In this project, I share some functions that I've written to allow importing, tidying and visualizing flow data downloaded from CEHQ website. 
+Files downloaded from Centre d'Expertise Hydrique du Québec (CEHQ) are messy. The header contains useful information, but this information is not well organised. The table with values appears a couple of lines below the header. In this project, we share some functions that we've written to allow downloading, importing, tidying and visualizing flow data from CEHQ website.
+
+
+> Disclaimer : The authors are not affiliated to any govermental organizations. 
 
 
 Step 1 : Download data
