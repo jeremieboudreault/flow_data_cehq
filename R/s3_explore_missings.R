@@ -115,14 +115,14 @@ plot_na_map <- function(stns,
     na_tbl <- na_tbl[YEAR >= from & YEAR <= to, ]
 
     # Add color of the points.
-    na_tbl[, OK := "No"]
+    na_tbl[, MISS := "Yes"]
     na_tbl[P_NA_TOT   < max_p_na &
            N_NA_TOT   < max_n_na &
            NA_RUN_MAX < max_na_run,
-           OK := "Yes"]
+           MISS := "No"]
 
     # Generate a nice order to plot the stations.
-    summ <- na_tbl[, .(N = sum(OK == "Yes")), by = STN_ID]
+    summ <- na_tbl[, .(N = sum(MISS == "No")), by = STN_ID]
 
     # Extract order of the table.
     order_stn <- summ[order(N, decreasing = TRUE), STN_ID]
@@ -140,7 +140,7 @@ plot_na_map <- function(stns,
     ) +
     geom_point(
         mapping = aes(
-            col = OK
+            col = MISS
         ),
         cex     = 1.5,
         pch     = 19L
@@ -156,17 +156,17 @@ plot_na_map <- function(stns,
         cex   = 3L
     ) +
     labs(
-        title = "NA summary",
+        title = "Overview of missing values",
         x     = "Year",
         y     = "Stations",
-        col   = ""
+        col   = "Too many missing :"
     ) +
     scale_color_manual(
-        values = c("#d73027", "#4575b4")
+        values = c("#4575b4", "#d73027")
     ) +
     custom_theme()
 
 }
 
 
-plot_na_map(stns, from = 1920, to = 2020, "year", 0.05, Inf, 3L)
+plot_na_map(stns, from = 1970, to = 2020, "year", 0.05, Inf, 3L)
