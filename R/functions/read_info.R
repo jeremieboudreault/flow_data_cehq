@@ -32,7 +32,6 @@ read_info <- function(path) {
     lat  <- sum(as.numeric(strsplit(lat, split = c("º |\' |\""))[[1]][1:3])/c(1,60,3600))
     lon  <- sum(as.numeric(strsplit(lon, split = c("º |\' |\""))[[1]][1:3])/c(1,60,3600))
 
-
     # Return a list
     l <- list(
         STATION_ID = stn,
@@ -45,6 +44,10 @@ read_info <- function(path) {
 
     # Trim whitespaces.
     l <- lapply(l, trimws, which = "both")
+
+    # Convert back lon/lat to numeric.
+    l$LATITUDE <- as.numeric(l$LATITUDE)
+    l$LONGITUDE <- as.numeric(l$LONGITUDE)
 
     # Close connection.
     close(con)
