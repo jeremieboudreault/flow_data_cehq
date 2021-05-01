@@ -1,23 +1,29 @@
-# import_txt.R
+# download_stns_files.R
 
 
-# Get flow data from cehq.qc.ca -- implemented for linux only
+# Download flow data from cehq.qc.ca -- implemented for Linux and Mac only.
 
 
+# Project : flow_data_cehq
+# Author  : Samuel Perreault
+# Email   : sperreault2407 [at] gmail [doc] com
+# Depends : R (v3.6.3)
+# License : To be determined...
 
-import_txt <- function(
+
+download_stns_files <- function(
     station_numbers, # stations to be imported
-    suffix = "Q", # Looking for _Q.txt files (or _N.txt files?), can be a vector
-    replace = T, # replace existing files (or skip download)
-    wait = 1,
-    verbose = T
+    suffix  = "Q",   # Looking for _Q.txt files (or _N.txt files?), can be a vector
+    replace = TRUE,  # replace existing files (or skip download)
+    wait    = 1L,
+    verbose = TRUE
 ) {
 
-    # filenames (as on the cehq website)
-    filenames <- paste0(station_numbers,"_",suffix,".txt")
+    # Filenames (as on the cehq website)
+    filenames <- paste0(station_numbers, "_", suffix, ".txt")
 
-    # check if some already exist
-    existing_files <- intersect(list.files("data"),filenames)
+    # Check if some already exist
+    existing_files <- intersect(list.files("data"), filenames)
 
     if(replace & length(existing_files) > 0) file.remove(file.path("data", existing_files))
     if(!replace & length(existing_files) > 0){
@@ -30,9 +36,10 @@ import_txt <- function(
     }
 
     # Detect OS and begin importation.
-    OS <- Sys.info()['sysname']
+    OS <- Sys.info()["sysname"]
 
-    if(OS == "Linux"){
+    # Check for Linux of Mac (Darwin).
+    if(OS == "Linux" | OS == "Darwin"){
 
         # construct appropriate urls
         urls <- paste0("https://www.cehq.gouv.qc.ca/depot/historique_donnees/fichier/",filenames)
@@ -47,14 +54,11 @@ import_txt <- function(
         # remove temp file
         file.remove(file.path("data","temp_station_urls00.txt"))
 
-    }else{
-        cat("Implemented only for Linux OS (so far).\n")
+    } else {
+        cat("Implemented only for Linux and Mac OS (so far).\n")
     }
 
-    # Do for Windows and Mac machines as well
-    # Mac : curl -O <url>? curl http://example.com/textfile.txt -o textfile.txt
-
-
+    # Do for Windows
     return(NULL)
 }
 
