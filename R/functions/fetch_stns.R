@@ -1,7 +1,7 @@
-# fetch_stns_numbers.R
+# fetch_stns.R
 
 
-# Get station numbers within a given hydrographic region.
+# Get station numbers (and other infos) within a given hydrographic region.
 
 
 # Project : flow_data_cehq
@@ -11,7 +11,7 @@
 # License : To be determined...
 
 
-fetch_stns_numbers <- function(
+fetch_stns <- function(
     region_numbers # 0 to 13 (except 0 and 11)
 ) {
 
