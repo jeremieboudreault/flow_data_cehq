@@ -1,7 +1,7 @@
-# missings_exploration.R
+# s3_missings_exploration.R
 
 
-# Exploration of missing values in stations with nice built-in functions.
+# Exploration of missing values in all stations with nice built-in functions.
 
 
 # Project : flow_data_cehq
@@ -23,11 +23,7 @@ library(ggplot2)
 
 
 source(file.path("R", "functions", "dates.R"))
-source(file.path("R", "functions", "download_stns_files.R"))
-source(file.path("R", "functions", "fetch_stns.R"))
 source(file.path("R", "functions", "plot_helpers.R"))
-source(file.path("R", "functions", "plot_flow_series.R"))
-source(file.path("R", "functions", "plot_flow_pot.R"))
 source(file.path("R", "functions", "read_table.R"))
 source(file.path("R", "functions", "read_info.R"))
 
@@ -52,11 +48,17 @@ names(infos) <- substr(files, 1L, nchar(files) - 6L)
 # Calculate NA statistics ------------------------------------------------------
 
 
-# Number of following NAs.
-calc_max_na_run <- function(x) {
+# Calculate longest run of NA for a given vector "x".
+calc_longest_na_run <- function(x) {
+
+    # Extract runs of NAs.
     runs <- rle(is.na(x))
+
+    # Check if there are any NAs.
     if (all(runs$values == FALSE)) {
         return(0L)
+
+    # If so, return the longest runs.
     } else {
         return(max(runs$length[runs$values == TRUE]))
     }
@@ -65,12 +67,12 @@ calc_max_na_run <- function(x) {
 # Function to calculate NA statistics.
 calc_na_stats <- function(stn, window = "year") {
 
-    # Create a very generic table.
+    # Create a very generic table of NAs.
     na_tbl <- stn[, .(
-        N_NA_OBS = sum(is.na(FLOW)),
-        N_OBS = .N,
-        N_TOT = 365 + is_leap(YEAR),
-        NA_RUN_MAX = calc_max_na_run(FLOW)
+        N_NA_OBS   = sum(is.na(FLOW)),
+        N_OBS      = .N,
+        N_TOT      = 365L + is_leap(YEAR),
+        NA_RUN_MAX = calc_longest_na_run(FLOW)
     ), by = YEAR]
 
     # Calculate true number of NAs.
