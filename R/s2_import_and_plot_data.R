@@ -12,6 +12,24 @@
 
 
 
+# Librairies -------------------------------------------------------------------
+
+
+library(data.table)
+library(ggplot2)
+
+
+# Functions --------------------------------------------------------------------
+
+
+source(file.path("R", "functions", "dates.R"))
+source(file.path("R", "functions", "plot_helpers.R"))
+source(file.path("R", "functions", "plot_flow_series.R"))
+source(file.path("R", "functions", "plot_flow_pot.R"))
+source(file.path("R", "functions", "read_table.R"))
+source(file.path("R", "functions", "read_info.R"))
+
+
 # Path to some specific stations -----------------------------------------------
 
 
@@ -110,3 +128,4 @@ plot_flow_pot(
     start  = "2016/01/01",
     end    = "2020/12/31"
 )
+
