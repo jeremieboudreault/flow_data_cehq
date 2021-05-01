@@ -4,10 +4,14 @@
 # Helpers function for the plots.
 
 
+# Project : flow_data_cehq
+# Author  : Jeremie Boudreault
+# Email   : jeremieboudreault11 [at] gmail [dot] com
+# Depends : R (v3.6.3)
+# License : To be determined...
 
-# Custom theme -----------------------------------------------------------------
 
-
+# custom_theme() : A customised theme for ggplot2.
 custom_theme <- function(x) {
     theme_bw() +
     theme(
@@ -23,7 +27,8 @@ custom_theme <- function(x) {
         plot.subtitle = element_text(
             hjust = 0.5,
             size  = 11L
-        )
+        ),
+        legend.position = "bottom"
     )
 }
 
