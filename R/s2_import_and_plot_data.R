@@ -1,7 +1,7 @@
-# main.R
+# s2_import_and_plot_data.R
 
 
-# Import data and extract relevant information from CEHQ.
+# Import data from some stations and do some basic plots.
 
 
 # Project : flow_data_cehq
@@ -12,52 +12,7 @@
 
 
 
-# Librairies -------------------------------------------------------------------
-
-
-library(data.table)
-library(ggplot2)
-library(rvest)
-library(dplyr)
-
-
-# Functions --------------------------------------------------------------------
-
-
-source(file.path("R", "functions", "dates.R"))
-source(file.path("R", "functions", "download_stns_files.R"))
-source(file.path("R", "functions", "fetch_stns.R"))
-source(file.path("R", "functions", "plot_helpers.R"))
-source(file.path("R", "functions", "plot_flow_series.R"))
-source(file.path("R", "functions", "plot_flow_pot.R"))
-source(file.path("R", "functions", "read_table.R"))
-source(file.path("R", "functions", "read_info.R"))
-
-
-# Fetch stations ---------------------------------------------------------------
-
-
-# Fetch station number from the sixth hydrological region.
-stns <- fetch_stns(6L)
-
-# Results.
-stns[Nom_de_la_station %in% "Chicoutimi", ]                   # 061004
-stns[Nom_de_la_station %in% "Sainte-Marguerite Nord-Est", ]   # 062803
-
-
-# Download stations files ------------------------------------------------------
-
-
-download_stns_files(
-    station_numbers = c("061004", "062803"),
-    suffix          = "Q",
-    replace         = TRUE,
-    wait            = 1L,
-    verbose         = FALSE
-)
-
-
-# Path to files ----------------------------------------------------------------
+# Path to some specific stations -----------------------------------------------
 
 
 # Sainte-Marguerite river <SMR>.
@@ -155,4 +110,3 @@ plot_flow_pot(
     start  = "2016/01/01",
     end    = "2020/12/31"
 )
-
