@@ -5,36 +5,27 @@ Import and visualize flow data from CHEQ 🌊
 Files downloaded from CEHQ are messy. The header contains useful information, but this information is not well organised. The table with values appears a couple of lines below the header. In this project, I share some functions that I've written to allow importing, tidying and visualizing flow data downloaded from CEHQ website. 
 
 
-Data
+Step 1 : Download data
 --------------------------------------------------------------------------------
 
+See R script `R/s1_data_download.R` for a complete example.
 
-Data consist of two stations downloaded from the [CEHQ website](https://www.cehq.gouv.qc.ca/hydrometrie/historique_donnees/default.asp) :
+```
+# Fetch stations.
+stns <- fetch_stns(1L)  # Id of the region.
 
-+ `062803_Q.txt` : Station on the Sainte-Margerite river.
-+ `061004_Q.txt` : Station on the Chicoutimi river.
-
-
-R script
---------------------------------------------------------------------------------
-
-
-All steps are performed in `main.R`. Functions are stored in `R/functions/` :
-
-+ `dates.R` : Helper functions for dates in both `Date` and `integer` formats.
-+ `read_table.R` : Function to read the data table from the downloaded file.
-+ `read_info.R` : Function to read the station information from the downloaded file.
-+ `plot_helpers.R` : Helper functions to be used with the `ggplot2` package.
-+ `plot_flow_series.R` : A general function to generate nice `ggplot2` plot of the flow series.
-+ `plot_flow_pot.R` : A general function to generate nice `ggplot2` plot of the peaks over threshold.
-
-
-How to use ?
---------------------------------------------------------------------------------
-
+# Download stations.
+download_stns_files(stns$No_de_la_station)
 
 ```
 
+Step 2 : Import and plot data
+--------------------------------------------------------------------------------
+
+See R script `R/s2_import_and_plot_data.R` for an example.
+
+
+```
 # Load table.
 tbl <- read_table(path)
 
@@ -55,6 +46,15 @@ plot_flow_pot(tbl, info, thresh = quantile(tbl$FLOW, 0.99))
 
 ```
 
+Step 3 : Explore missing values.
+--------------------------------------------------------------------------------
+
+See R script `R/s3_explore_missings.R` for an example.
+
+```
+# To be completed...
+
+```
 
 Results
 --------------------------------------------------------------------------------
@@ -77,6 +77,11 @@ Results
 #### Subset of the flow series of Chicoutimi river with `NA`s :
 
 ![](plots/chi_sub_series_na.png)
+
+
+#### Overview of missing values :
+
+![](plots/missings_map.png)
 
 
 #### Peaks-over-threshold for the full Chicoutimi river flow series : 
