@@ -52,12 +52,24 @@ read_info <- function(path) {
 
 # Mapping between weird character and correct UTF-8 values.
 map_char <- list(
-    `\xe8` = "è",
-    `\xe9` = "é",
-    `\xe0` = "à",
-    `\xb3` = "**3",
-    `\xb2` = "**2",
-    `\xb0`  = "º"
+  `\xc9` = "É",
+  `\xcb` = "Ë",
+  `\xe8` = "è",
+  `\xe9` = "é",
+  `\xeA` = "ê",
+  `\xeb` = "ë",
+  `\xc0` = "À",
+  `\xc2` = "Â",
+  `\xe0` = "à",
+  `\xe2` = "â",
+  `\xce` = "Î",
+  `\xee` = "î",
+  `\xf4` = "ô",
+  `\xc7` = "Ç",
+  `\xe7` = "ç",
+  `\xb3` = "**3",
+  `\xb2` = "**2",
+  `\xb0`  = "º"
 )
 
 # Version of gsub() accepting multiple patterns and replacement value.
