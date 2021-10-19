@@ -77,7 +77,8 @@ map_char <- list(
   `\xe7` = "ç",
   `\xb3` = "**3",
   `\xb2` = "**2",
-  `\xb0`  = "º"
+  `\xb0`  = "º",
+  `\xfc\xbe\x8c\xa3\xa4\xbc` = "'"
 )
 
 # Version of gsub() accepting multiple patterns and replacement value.
