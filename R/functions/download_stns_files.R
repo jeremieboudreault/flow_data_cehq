@@ -49,7 +49,7 @@ download_stns_files <- function(
         write.table(data.frame(urls), file.path(path,"temp_station_urls00.txt"), row.names = F, col.names = F, quote = F)
 
         # run command in terminal
-        shell_command <- paste0("cd data; wget --input-file temp_station_urls00.txt --wait=",wait)
+        shell_command <- paste0("cd ", path, "; wget --input-file temp_station_urls00.txt --wait=", wait)
         system(command = shell_command)
 
         # remove temp file
