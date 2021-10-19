@@ -48,9 +48,9 @@ download_stns_files(
     suffix          = "Q",
     replace         = TRUE,
     wait            = 1L,
-    verbose         = FALSE
+    verbose         = FALSE,
+    path            = "data"
 )
 
 # Note : Files are now downloaded into the data/ folder.
-
 
