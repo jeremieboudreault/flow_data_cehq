@@ -29,8 +29,8 @@ read_info <- function(path) {
     lon  <- substr(lines[5L], gregexpr("//", lines[5L])[[1L]][1L] + 2L, 50L)
 
     # Express lat-long in decimal
-    lat  <- sum(as.numeric(strsplit(lat, split = c("º |\' |\""))[[1]][1:3])/c(1,60,3600))
-    lon  <- sum(as.numeric(strsplit(lon, split = c("º |\' |\""))[[1]][1:3])/c(1,60,3600))
+    lat  <- dms_to_decimal(lat)
+    lon  <- dms_to_decimal(lon)
 
     # Return a list
     l <- list(
