@@ -26,7 +26,7 @@ read_info <- function(path) {
     ws   <- substr(lines[4L], 16L, 31L)
     reg  <- substr(lines[4L], 41L, nchar(lines[4L]))
     lat  <- substr(lines[5L], 24L, 35L)
-    lon  <- substr(lines[5L], 39L, 50L)
+    lon  <- substr(lines[5L], gregexpr("//", lines[5L])[[1L]][1L] + 2L, 50L)
 
     # Express lat-long in decimal
     lat  <- sum(as.numeric(strsplit(lat, split = c("º |\' |\""))[[1]][1:3])/c(1,60,3600))
